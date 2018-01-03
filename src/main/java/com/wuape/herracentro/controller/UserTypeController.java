@@ -2,10 +2,9 @@ package com.wuape.herracentro.controller;
 
 import com.wuape.herracentro.bean.UserType;
 import com.wuape.herracentro.repository.UserTypeRepository;
+import javassist.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Bowpi GT
@@ -27,8 +26,13 @@ public class UserTypeController {
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity<UserType> getUserById(@PathVariable(name = "id") Long id) {
-        return ResponseEntity.ok(userTypeRepository.findOne(id));
+    private ResponseEntity<UserType> getUserTypeById(@PathVariable(name = "id") Long id) throws NotFoundException {
+        UserType userType = userTypeRepository.findOne(id);
+
+        if (userType == null) {
+            throw new NotFoundException("User type with id [" + id + "] cannot be found ");
+        }
+        return ResponseEntity.ok(userType);
     }
 
     @GetMapping

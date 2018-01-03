@@ -2,6 +2,7 @@ package com.wuape.herracentro.controller;
 
 import com.wuape.herracentro.bean.UserAuthority;
 import com.wuape.herracentro.repository.UserAuthorityRepository;
+import javassist.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +27,14 @@ public class UserAuthorityController {
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity<UserAuthority> findUserAuthorityById(@PathVariable(name = "id") Long id) {
-        return ResponseEntity.ok(userAuthorityRepository.findOne(id));
+    private ResponseEntity<UserAuthority> findUserAuthorityById(@PathVariable(name = "id") Long id) throws NotFoundException {
+        UserAuthority userAuthority = userAuthorityRepository.findOne(id);
+
+        if (userAuthority == null) {
+            throw new NotFoundException("User authority with id [" + id + "] cannot be found in system.");
+        }
+
+        return ResponseEntity.ok(userAuthority);
     }
 
     @GetMapping()
