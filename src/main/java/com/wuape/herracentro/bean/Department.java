@@ -1,5 +1,7 @@
 package com.wuape.herracentro.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ public class Department {
 
     @Column(name = "nombre_departamento")
     private String name;
+
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     Set<Town> towns;
@@ -45,6 +48,7 @@ public class Department {
         this.name = name;
     }
 
+    @JsonIgnore
     public Set<Town> getTowns() {
         return towns;
     }

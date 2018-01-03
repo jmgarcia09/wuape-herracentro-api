@@ -25,6 +25,20 @@ public class UserTypeController {
         return ResponseEntity.ok(userTypeRepository.save(userType));
     }
 
+    @PutMapping("/{id}")
+    private ResponseEntity<UserType> updateUserType(@PathVariable(name = "id") Long id, @RequestBody UserType userType) throws NotFoundException {
+        UserType currentUserType = userTypeRepository.findOne(id);
+
+        if (currentUserType == null) {
+            throw new NotFoundException("User type with id [" + id + "] cannot be found ");
+        }
+        if (userType.getId() == 0 || userType.getId() != id) {
+            userType.setId(id);
+        }
+        userType = userTypeRepository.save(userType);
+        return ResponseEntity.ok(userType);
+    }
+
     @GetMapping("/{id}")
     private ResponseEntity<UserType> getUserTypeById(@PathVariable(name = "id") Long id) throws NotFoundException {
         UserType userType = userTypeRepository.findOne(id);

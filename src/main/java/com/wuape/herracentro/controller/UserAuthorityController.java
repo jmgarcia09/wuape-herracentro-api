@@ -26,6 +26,20 @@ public class UserAuthorityController {
         return ResponseEntity.ok(userAuthorityRepository.save(userAuthority));
     }
 
+    @PutMapping("/{id}")
+    private ResponseEntity<UserAuthority> updateUserAuthority(@PathVariable(name = "id") Long id, @RequestBody UserAuthority userAuthority) throws NotFoundException {
+        UserAuthority currentUserAuthority = userAuthorityRepository.findOne(id);
+
+        if (currentUserAuthority == null) {
+            throw new NotFoundException("User authority with id [" + id + "] cannot be found ");
+        }
+        if (userAuthority.getId() == 0 || userAuthority.getId() != id) {
+            userAuthority.setId(id);
+        }
+        userAuthority = userAuthorityRepository.save(userAuthority);
+        return ResponseEntity.ok(userAuthority);
+    }
+
     @GetMapping("/{id}")
     private ResponseEntity<UserAuthority> findUserAuthorityById(@PathVariable(name = "id") Long id) throws NotFoundException {
         UserAuthority userAuthority = userAuthorityRepository.findOne(id);

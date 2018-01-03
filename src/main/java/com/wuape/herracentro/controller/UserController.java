@@ -25,6 +25,20 @@ public class UserController {
         return ResponseEntity.ok(userRepository.save(user));
     }
 
+    @PutMapping("/{id}")
+    private ResponseEntity<User> updateUser(@PathVariable(name = "id") Long id, @RequestBody User user) throws NotFoundException {
+        User currentUser = userRepository.findOne(id);
+
+        if (currentUser == null) {
+            throw new NotFoundException("User with id [" + id + "] cannot be found ");
+        }
+        if (user.getId() == 0 || user.getId() != id) {
+            user.setId(id);
+        }
+        user = userRepository.save(user);
+        return ResponseEntity.ok(user);
+    }
+
     @GetMapping("/{id}")
     private ResponseEntity<User> getUserById(@PathVariable(name = "id") Long id) throws NotFoundException {
         User user = userRepository.findOne(id);

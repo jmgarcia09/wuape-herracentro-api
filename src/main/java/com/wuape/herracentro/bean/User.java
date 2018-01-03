@@ -14,7 +14,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_usuario")
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "id_tipo_usuario")
@@ -57,11 +57,11 @@ public class User {
     public User() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
