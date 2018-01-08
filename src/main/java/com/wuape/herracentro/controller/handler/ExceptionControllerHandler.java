@@ -19,7 +19,7 @@ public class ExceptionControllerHandler {
 
     private final Logger logger = LoggerFactory.getLogger(ExceptionControllerHandler.class);
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler({NotFoundException.class, IllegalArgumentException.class})
     private ResponseEntity<MessageHandler> notFound(HttpServletRequest req, Exception ex) {
         logger.error("Error trying to process request. Error message is: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageHandler(req.getRequestURI(), ex.getMessage()));
@@ -28,7 +28,7 @@ public class ExceptionControllerHandler {
 
     @ExceptionHandler(Exception.class)
     private ResponseEntity<MessageHandler> globalExceptionHandler(HttpServletRequest req, Exception ex) {
-        logger.error("Unknown message ocurred. Error message is: {}", ex.getMessage());
+        logger.error("Unknown message occurred. Error message is: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageHandler(req.getRequestURI(), ex.getMessage()));
 
     }
