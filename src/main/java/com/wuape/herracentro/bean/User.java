@@ -1,5 +1,7 @@
 package com.wuape.herracentro.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**

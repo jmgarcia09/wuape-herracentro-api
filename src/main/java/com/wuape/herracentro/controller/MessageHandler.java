@@ -1,4 +1,4 @@
-package com.wuape.herracentro.controller.handler;
+package com.wuape.herracentro.controller;
 
 /**
  * Bowpi GT

@@ -1,5 +1,6 @@
 package com.wuape.herracentro.controller.handler;
 
+import com.wuape.herracentro.controller.MessageHandler;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
