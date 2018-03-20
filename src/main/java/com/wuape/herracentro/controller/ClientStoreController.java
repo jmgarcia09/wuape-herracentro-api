@@ -30,7 +30,7 @@ public class ClientStoreController {
         ClientStore currentClientStore = clientStoreRepository.findOne(id);
 
         Assert.notNull(currentClientStore, "Client Store with id [" + id + "] cannot be found.");
-        if (currentClientStore.getId() == 0 || currentClientStore.getId() != id) {
+        if (clientStore.getId() == null || clientStore.getId() == 0) {
             clientStore.setId(id);
         }
         clientStore = clientStoreRepository.save(clientStore);
