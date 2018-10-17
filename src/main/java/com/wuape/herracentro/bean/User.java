@@ -25,9 +25,9 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "id_direccion")
     private Address address;
-    @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    private Client client;
+//    @ManyToOne
+//    @JoinColumn(name = "id_cliente")
+//    private Client client;
 
     @Column(name = "nombre")
     private String name;
@@ -48,7 +48,7 @@ public class User {
         this.userType = userType;
         this.userAuthority = userAuthority;
         this.address = address;
-        this.client = client;
+//        this.client = client;
         this.name = name;
         this.lastName = lastName;
         this.dpi = dpi;
@@ -149,13 +149,13 @@ public class User {
         this.access = access;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
+//    public Client getClient() {
+//        return client;
+//    }
+//
+//    public void setClient(Client client) {
+//        this.client = client;
+//    }
 
     @Override
     public String toString() {
