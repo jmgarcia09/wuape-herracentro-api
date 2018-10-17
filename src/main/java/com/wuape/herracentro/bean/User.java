@@ -1,7 +1,5 @@
 package com.wuape.herracentro.bean;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 /**
@@ -27,6 +25,9 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "id_direccion")
     private Address address;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Client client;
 
     @Column(name = "nombre")
     private String name;
@@ -41,12 +42,13 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "acceso")
-    private String access;
+    private int access;
 
-    public User(UserType userType, UserAuthority userAuthority, Address address, String name, String lastName, String dpi, String phone, String loginId, String password, String access) {
+    public User(UserType userType, UserAuthority userAuthority, Address address, Client client, String name, String lastName, String dpi, String phone, String loginId, String password, int access) {
         this.userType = userType;
         this.userAuthority = userAuthority;
         this.address = address;
+        this.client = client;
         this.name = name;
         this.lastName = lastName;
         this.dpi = dpi;
@@ -139,12 +141,20 @@ public class User {
         this.password = password;
     }
 
-    public String getAccess() {
+    public int getAccess() {
         return access;
     }
 
-    public void setAccess(String access) {
+    public void setAccess(int access) {
         this.access = access;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override

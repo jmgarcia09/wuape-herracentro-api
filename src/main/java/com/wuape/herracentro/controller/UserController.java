@@ -1,5 +1,6 @@
 package com.wuape.herracentro.controller;
 
+import com.wuape.herracentro.bean.Address;
 import com.wuape.herracentro.bean.User;
 import com.wuape.herracentro.repository.UserRepository;
 import com.wuape.herracentro.util.EncryptUtil;
@@ -7,7 +8,6 @@ import javassist.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -29,6 +29,13 @@ public class UserController {
     private ResponseEntity<User> addUser(@RequestBody User user) {
 
         user.setPassword(EncryptUtil.convertToMd5(user.getPassword()));
+
+        //Default Address
+        if (user.getAddress() == null) {
+            Address address = new Address();
+            address.setId(5L);
+            user.setAddress(address);
+        }
         return ResponseEntity.ok(userRepository.save(user));
     }
 
