@@ -8,10 +8,25 @@ public class MessageHandler {
 
     private String requestUri;
     private String message;
+    private Object data;
+
+    public MessageHandler(String requestUri, String message, Object data) {
+        this.requestUri = requestUri;
+        this.message = message;
+        this.data = data;
+    }
 
     public MessageHandler(String requestUri, String message) {
         this.requestUri = requestUri;
         this.message = message;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public MessageHandler(String message) {

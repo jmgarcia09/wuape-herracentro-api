@@ -36,6 +36,7 @@ public class AuthenticationController {
 
         if(authenticatedUser != null){
             responseMessage.setMessage("User '" + authenticatedUser.getLoginId() + "' authenticated successfully.");
+            responseMessage.setData(authenticatedUser);
             return ResponseEntity.ok(responseMessage);
         }
 

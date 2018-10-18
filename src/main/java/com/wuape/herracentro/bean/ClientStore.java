@@ -15,9 +15,7 @@ public class ClientStore {
     @Column(name = "id_tienda")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "nit_cliente")
-    private Client client;
+
 
     @Column(name = "nombre_tienda")
     private String name;
@@ -34,8 +32,7 @@ public class ClientStore {
     @Column(name = "telefono_2")
     private String secondPhone;
 
-    public ClientStore(Client client, String name, Address address, String note, String phone, String secondPhone) {
-        this.client = client;
+    public ClientStore( String name, Address address, String note, String phone, String secondPhone) {
         this.name = name;
         this.address = address;
         this.note = note;
@@ -52,14 +49,6 @@ public class ClientStore {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public String getName() {
@@ -106,7 +95,6 @@ public class ClientStore {
     public String toString() {
         return "ClientStore{" +
                 "id=" + id +
-                ", client=" + client +
                 ", name='" + name + '\'' +
                 ", address=" + address +
                 ", note='" + note + '\'' +

@@ -16,8 +16,9 @@ public class Incidence {
     @Temporal(TemporalType.DATE)
     private Date callDate;
 
-    @Column(name = "id_tienda")
-    private Long storeId;
+    @ManyToOne
+    @JoinColumn(name = "id_tienda")
+    private ClientStore clientStore;
 
     @Column(name = "descripcion_incidencia")
     private String incidenceDescription;
@@ -42,9 +43,9 @@ public class Incidence {
     @Column(name = "entrante_saliente")
     private int incomingOutcoming;
 
-    public Incidence(Date callDate, Long storeId, String incidenceDescription, String solutionDescription, IncidenceType incidenceType, User user, String transmitterName, String transmitterPhone, int incomingOutcoming) {
+    public Incidence(Date callDate, ClientStore clientStore, String incidenceDescription, String solutionDescription, IncidenceType incidenceType, User user, String transmitterName, String transmitterPhone, int incomingOutcoming) {
         this.callDate = callDate;
-        this.storeId = storeId;
+        this.clientStore = clientStore;
         this.incidenceDescription = incidenceDescription;
         this.solutionDescription = solutionDescription;
         this.incidenceType = incidenceType;
@@ -73,12 +74,12 @@ public class Incidence {
         this.callDate = callDate;
     }
 
-    public Long getStoreId() {
-        return storeId;
+    public ClientStore getClientStore() {
+        return clientStore;
     }
 
-    public void setStoreId(Long storeId) {
-        this.storeId = storeId;
+    public void setClientStore(ClientStore clientStore) {
+        this.clientStore = clientStore;
     }
 
     public String getIncidenceDescription() {
@@ -142,7 +143,7 @@ public class Incidence {
         return "Incidence{" +
                 "id=" + id +
                 ", callDate=" + callDate +
-                ", storeId=" + storeId +
+                ", clientStore =" + clientStore +
                 ", incidenceDescription='" + incidenceDescription + '\'' +
                 ", solutionDescription='" + solutionDescription + '\'' +
                 ", incidenceType=" + incidenceType +

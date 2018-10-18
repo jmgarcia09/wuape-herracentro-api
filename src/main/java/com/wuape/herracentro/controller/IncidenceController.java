@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 @RequestMapping("/incidence")
 public class IncidenceController {
@@ -18,6 +20,7 @@ public class IncidenceController {
 
     @PostMapping("/add")
     private ResponseEntity<Incidence> addIncidence(@RequestBody Incidence incidence) {
+        incidence.setCallDate(new Date());
         return ResponseEntity.ok(incidenceRepository.save(incidence));
     }
 
